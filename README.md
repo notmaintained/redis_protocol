@@ -1,6 +1,6 @@
 # redis_protocol
 
-Simple PHP client Library for the [Redis Protocol](http://redis.io/topics/protocol).
+Simple PHP client library for the [Redis protocol](http://redis.io/topics/protocol).
 
 
 ## Requirements
