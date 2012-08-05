@@ -1,0 +1,19 @@
+{
+	"name": "sandeepshetty/redis_protocol",
+	"type": "library",
+	"description": "Simple PHP client Library for the Redis Protocol (http://redis.io/topics/protocol). ",
+	"keywords": ["redis"],
+	"homepage": "https://github.com/sandeepshetty/redis_client",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Sandeep Shetty",
+			"email": "sandeep.shetty@gmail.com",
+			"homepage": "http://sandeep.shetty.in",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0"
+	}
+}
