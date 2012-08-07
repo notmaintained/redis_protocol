@@ -63,3 +63,6 @@ The returned function accepts a Redis command as a string.
 
 ?>
 ```
+
+## TODO
+Support for Pipelining and Clustering.
