@@ -48,45 +48,37 @@
 
 			$reply = trim($reply);
 			$reply_type = $reply[0];
+			$data = substr($reply, 1);
 
 			switch($reply[0])
 			{
 				case STATUS_REPLY:
-					$response = substr($reply, 1);
-					if ('ok' == strtolower($response)) $response = true;
-					break;
+					if ('ok' == strtolower($data)) return true;
+					return $data;
 
 				case ERROR_REPLY:
-					throw new RedisProtocolException(substr($reply, 5));
-					break;
+					throw new RedisProtocolException(substr($data, 4));
 
 				case INTEGER_REPLY:
-					$response = substr($reply, 1);
-					break;
+					return $data;
 
 				case BULK_REPLY:
-					$data_length = intval(substr($reply, 1));
+					$data_length = intval($data);
 					if ($data_length < 0) return NULL;
-
-					$data_length += strlen("\r\n");
-					$response = stream_get_contents($fp, $data_length);
-					if (FALSE === $response) throw new SocketException('Error Reading Bulk Reply');
-					$response = trim($response);
-					break;
+					$bulk_reply = stream_get_contents($fp, $data_length + strlen("\r\n"));
+					if (FALSE === $bulk_reply) throw new SocketException('Error Reading Bulk Reply');
+					return trim($bulk_reply);
 
 				case MULTI_BULK_REPLY:
-					$bulk_reply_count = intval(substr($reply, 1));
+					$bulk_reply_count = intval($data);
 					if ($bulk_reply_count < 0) return NULL;
-					$response = array();
-					foreach(range(1, $bulk_reply_count) as $i) $response[] = _reply();
-					break;
+					$multi_bulk_reply = array();
+					foreach(range(1, $bulk_reply_count) as $i) $multi_bulk_reply[] = _reply();
+					return $multi_bulk_reply;
 
 				default:
 					throw new RedisProtocolException("Unknown Reply Type: $reply");
-					break;
 			}
-
-			return $response;
 		}
 
 ?>
