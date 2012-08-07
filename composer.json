@@ -3,7 +3,7 @@
 	"type": "library",
 	"description": "Simple PHP client library for the Redis protocol (http://redis.io/topics/protocol)",
 	"keywords": ["redis"],
-	"homepage": "https://github.com/sandeepshetty/redis_client",
+	"homepage": "https://github.com/sandeepshetty/redis_protocol",
 	"license": "MIT",
 	"authors": [
 		{
