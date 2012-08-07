@@ -65,8 +65,10 @@
 					break;
 
 				case BULK_REPLY:
-					$data_length = intval(substr($reply, 1)) + strlen("\r\n");
+					$data_length = intval(substr($reply, 1));
 					if ($data_length < 0) return NULL;
+
+					$data_length += strlen("\r\n");
 					$response = stream_get_contents($fp, $data_length);
 					if (FALSE === $response) throw new SocketException('Error Reading Bulk Reply');
 					$response = trim($response);
